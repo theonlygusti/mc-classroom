@@ -1,0 +1,4 @@
+target/
+# kill many birds with one stone, .DS_Store, .settings/, .project, etc.
+.*
+!.gitignore
