@@ -4,6 +4,10 @@
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
   <groupId>mcclassroom.javaplugin</groupId>
   <artifactId>mc-classroom</artifactId>
   <version>0.0.0</version>
@@ -21,6 +25,11 @@
       <id>papermc</id>
       <url>https://papermc.io/repo/repository/maven-public/</url>
     </repository>
+    <repository>
+      <id>jcenter</id>
+      <name>jcenter-bintray</name>
+      <url>https://jcenter.bintray.com</url>
+    </repository>
   </repositories>
 
   <dependencies>
@@ -29,6 +38,11 @@
       <artifactId>paper-api</artifactId>
       <version>1.16.3-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.dv8tion</groupId>
+      <artifactId>JDA</artifactId>
+      <version>4.2.0_222</version>
     </dependency>
   </dependencies>
 
