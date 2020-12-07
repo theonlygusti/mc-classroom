@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>mcclassroom.javaplugin</groupId>
-  <artifactId>mc-classroom-java</artifactId>
+  <artifactId>mc-classroom</artifactId>
   <version>0.0.0</version>
 
   <name>Minecraft Classroom Java Plugin</name>
@@ -13,7 +13,7 @@
     Minecraft server plugin for virtual classrooms. Provides administrator interface
     and virtual classroom functionalities.
   </description>
-  <url>https://github.com/theonlygusti/mc-classroom-java</url>
+  <url>https://github.com/theonlygusti/mc-classroom</url>
   <inceptionYear>2020</inceptionYear>
 
   <repositories>
