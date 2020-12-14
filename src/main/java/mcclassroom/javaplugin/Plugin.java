@@ -50,6 +50,8 @@ public class Plugin extends JavaPlugin implements Listener {
 
     getCommand("groups").setExecutor(this);
     getCommand("groupsof").setExecutor(this);
+    getCommand("rotateworlds").setExecutor(this);
+    getCommand("shufflegroups").setExecutor(this);
     getCommand("bring").setExecutor(this);
     getCommand("breakout").setExecutor(this);
     getCommand("movegroup").setExecutor(this);
@@ -95,12 +97,14 @@ public class Plugin extends JavaPlugin implements Listener {
       Collections.shuffle(students);
       for (int i = 0; i < students.size(); i++) {
         int groupNumber = i / totalGroups + 1;
+        User student = students.get(i);
+        student.groupNumber = groupNumber;
         ArrayList<User> group = groups.get(groupNumber);
         if (group == null) {
           group = new ArrayList<>();
           groups.put(groupNumber, group);
         }
-        group.add(students.get(i));
+        group.add(student);
       }
       sender.sendMessage(getMessage("groups-success").replaceAll("%N%", String.valueOf(totalGroups)).replaceAll("%n%", String.valueOf(groups.get(1).size())));
     } else if (cmd.getName().equalsIgnoreCase("groupsof")) {
@@ -114,9 +118,52 @@ public class Plugin extends JavaPlugin implements Listener {
           group = new ArrayList<>();
           groups.put(groupNumber, group);
         }
+        students.get(i).groupNumber = groupNumber;
         group.add(students.get(i));
       }
       sender.sendMessage(getMessage("groups-success").replaceAll("%N%", String.valueOf(groups.size())).replaceAll("%n%", String.valueOf(groupSize)));
+    } else if (cmd.getName().equalsIgnoreCase("rotateworlds")) {
+      int amount;
+      if (args.length == 1) {
+        amount = Integer.parseInt(args[0]);
+      } else {
+        amount = 1;
+      }
+      int totalGroups = groups.size();
+      HashMap<Integer, ArrayList<User>> newGroups = new HashMap<>();
+      for (int groupNumber : groups.keySet()) {
+        int newGroupNumber = (groupNumber + amount - 1) % totalGroups + 1; // one-indexed group numbers
+        newGroups.put(newGroupNumber, new ArrayList<>());
+        for (User student : groups.get(groupNumber)) {
+          student.groupNumber = newGroupNumber;
+        }
+      }
+      groups = newGroups;
+      for (User student : students) {
+        discordBot.moveUser(student, student.groupNumber);
+        sandboxWorlds.sendp(GROUP_WORLD_PREFIX + student.groupNumber, Bukkit.getPlayer(student.minecraftUniqueId));
+      }
+      sender.sendMessage(getMessage("rotateworlds-success"));
+    } else if (cmd.getName().equalsIgnoreCase("shufflegroups")) {
+      int totalGroups = groups.size();
+      groups = new HashMap<>();
+      Collections.shuffle(students);
+      for (int i = 0; i < students.size(); i++) {
+        int groupNumber = i / totalGroups + 1;
+        User student = students.get(i);
+        student.groupNumber = groupNumber;
+        ArrayList<User> group = groups.get(groupNumber);
+        if (group == null) {
+          group = new ArrayList<>();
+          groups.put(groupNumber, group);
+        }
+        group.add(student);
+      }
+      for (User student : students) {
+        discordBot.moveUser(student, student.groupNumber);
+        sandboxWorlds.sendp(GROUP_WORLD_PREFIX + student.groupNumber, Bukkit.getPlayer(student.minecraftUniqueId));
+      }
+      sender.sendMessage(getMessage("shufflegroups-success").replaceAll("%N%", String.valueOf(totalGroups)).replaceAll("%n%", String.valueOf(groups.get(1).size())));
     } else if (cmd.getName().equalsIgnoreCase("movegroup")) {
       String playerName = args[0];
       int newGroupNumber = Integer.parseInt(args[1]);
@@ -142,6 +189,10 @@ public class Plugin extends JavaPlugin implements Listener {
       Player player = (Player) sender;
       User user = users.get(player.getUniqueId());
       int groupNumber = Integer.parseInt(args[0]);
+      if (groupNumber == 0) { // send to default world
+        sandboxWorlds.sendp(sandboxWorlds.defaultWorld.getName(), player);
+        return true;
+      }
       discordBot.moveUser(user, groupNumber);
       String worldName = GROUP_WORLD_PREFIX + groupNumber;
       sandboxWorlds.sendp(worldName, player);
