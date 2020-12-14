@@ -1,0 +1,21 @@
+default-world: world
+default-vc: null # string ID of the home voice channel
+discord-bot-token: null # string of the discord token
+discord-guild-id: null # id of the server that the bot should manage
+messages:
+  not-a-number: '§cThat is not a number!'
+  player-not-online: '§cThe player %playername% is not online!'
+  link-success: '§eSuccessfully linked your discord account to your minecraft account, %discord_name%.'
+  groups-success: '§eThe class has been split into %N% groups of %n% students each'
+  movegroups-success: '§eThe student has been moved to group %group%'
+  breakout-success: "§eSuccessfully sent all students to their own group's world."
+  visit-success: "§eYou have been sent to group %group%'s world"
+  bring-success: '§eBrought all online chosen players to the world you are currently in'
+  youre-not-a-player: '§cYou must be a player to perform this command!'
+  link-token: |-
+    Your token is: %link%
+    Run `/link %link%` in the game to link your discord and minecraft accounts!
+  discord-help: |-
+    These are the commands that you can use:
+    **?link**, **?token**: Show you your token for linking your in-game account to your discord account
+    **?help**: Show this help message

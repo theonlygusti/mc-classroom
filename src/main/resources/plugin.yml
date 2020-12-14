@@ -5,3 +5,34 @@ author: George
 main: mcclassroom.javaplugin.Plugin
 api-version: 1.16
 depend: [ ]
+commands:
+  breakout:
+    description: Send groups to worlds
+    permission: mcclassroom.teacher
+  groups:
+    description: Create N groups randomly
+    permission: mcclassroom.teacher
+  groupsof:
+    description: Create groups of N people each
+    permission: mcclassroom.teacher
+  movegroup:
+    description: Moves the player to the specified group.
+    permission: mcclassroom.teacher
+  visit:
+    description: Visit a group's world
+    permission: mcclassroom.teacher
+  bring:
+    description: Bring players to this world
+    permission: mcclassroom.teacher
+  link:
+    permission: mcclassroom.user
+permissions:
+  mcclassroom.user:
+    description: A participant in the MC Classroom
+    default: true
+  mcclassroom.teacher:
+    description: A teacher of the MC Classroom.
+    default: op
+  mcclassroom.student:
+    description: A student in the MC Classroom
+    default: not op
