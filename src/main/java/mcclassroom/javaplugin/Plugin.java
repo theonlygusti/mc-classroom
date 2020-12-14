@@ -140,7 +140,9 @@ public class Plugin extends JavaPlugin implements Listener {
       sender.sendMessage(getMessage("breakout-success"));
     } else if (cmd.getName().equalsIgnoreCase("visit")) {
       Player player = (Player) sender;
+      User user = users.get(player.getUniqueId());
       int groupNumber = Integer.parseInt(args[0]);
+      discordBot.moveUser(user, groupNumber);
       String worldName = GROUP_WORLD_PREFIX + groupNumber;
       sandboxWorlds.sendp(worldName, player);
       sender.sendMessage(getMessage("visit-success").replaceAll("%group%", String.valueOf(groupNumber)));
