@@ -7,6 +7,8 @@ messages:
   player-not-online: '§cThe player %playername% is not online!'
   link-success: '§eSuccessfully linked your discord account to your minecraft account, %discord_name%.'
   groups-success: '§eThe class has been split into %N% groups of %n% students each'
+  shufflegroups-success: '§eStudents have been randomly reassigned to new groups. There are still %N% groups of %n% students each.'
+  rotateworlds-success: "§eEach group has been sent to the specified relative group's world."
   movegroups-success: '§eThe student has been moved to group %group%'
   breakout-success: "§eSuccessfully sent all students to their own group's world."
   visit-success: "§eYou have been sent to group %group%'s world"
