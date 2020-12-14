@@ -15,6 +15,12 @@ commands:
   groupsof:
     description: Create groups of N people each
     permission: mcclassroom.teacher
+  rotateworlds:
+    description: Preserve group world states and move groups to the next group's world.
+    permission: mcclassroom.teacher
+  shufflegroups:
+    description: Re-assign group members within the current constraints of group size. Preserve group world states.
+    permission: mcclassroom.teacher
   movegroup:
     description: Moves the player to the specified group.
     permission: mcclassroom.teacher
@@ -25,6 +31,7 @@ commands:
     description: Bring players to this world
     permission: mcclassroom.teacher
   link:
+    description: Link discord account and minecraft account so that in-game groups and voicechats will stay synced
     permission: mcclassroom.user
 permissions:
   mcclassroom.user:
