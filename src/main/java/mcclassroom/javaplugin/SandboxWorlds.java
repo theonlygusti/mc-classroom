@@ -30,10 +30,7 @@ public class SandboxWorlds {
 
   public void createWorld(String name, int chunkSize) {
     WorldCreator worldCreator = new WorldCreator(name);
-    worldCreator.environment(World.Environment.NORMAL);
-    worldCreator.type(WorldType.FLAT);
-
-    worldCreator.generateStructures(false);
+    worldCreator.generator(new RedstoneReadyChunkGenerator());
     worldCreator.createWorld();
 
     World world = Bukkit.getWorld(name);
