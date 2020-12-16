@@ -50,6 +50,7 @@ public class Plugin extends JavaPlugin implements Listener {
 
     getCommand("groups").setExecutor(this);
     getCommand("groupsof").setExecutor(this);
+    getCommand("makegroup").setExecutor(this);
     getCommand("rotateworlds").setExecutor(this);
     getCommand("shufflegroups").setExecutor(this);
     getCommand("bring").setExecutor(this);
@@ -176,6 +177,24 @@ public class Plugin extends JavaPlugin implements Listener {
       discordBot.moveUser(user, user.groupNumber);
       sandboxWorlds.sendp(GROUP_WORLD_PREFIX + newGroupNumber, player);
       sender.sendMessage(getMessage("movegroup-success").replaceAll("%group%", String.valueOf(newGroupNumber)));
+    } else if (cmd.getName().equalsIgnoreCase("makegroup")) {
+      ArrayList<User> newGroup = new ArrayList<User>();
+      for (String playerName : args) {
+        User student = users.get(Bukkit.getPlayer(playerName).getUniqueId());
+        if (student.groupNumber != null) {
+          groups.get(student.groupNumber).remove(student);
+        }
+        newGroup.add(student);
+      }
+      int newGroupNumber = 1;
+      while (groups.containsKey(newGroupNumber) && groups.get(newGroupNumber).size() > 0) {
+        newGroupNumber += 1;
+      }
+      for (User student : newGroup) {
+        student.groupNumber = newGroupNumber;
+      }
+      groups.put(newGroupNumber, newGroup);
+      sender.sendMessage(getMessage("makegroup-success").replaceAll("%n%", String.valueOf(newGroup.size())));
     } else if (cmd.getName().equalsIgnoreCase("breakout")) {
       discordBot.makeGroups();
       for (int groupNumber : groups.keySet()) {

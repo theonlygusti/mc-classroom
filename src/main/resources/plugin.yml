@@ -24,6 +24,9 @@ commands:
   movegroup:
     description: Moves the player to the specified group.
     permission: mcclassroom.teacher
+  makegroup:
+    description: Creates a group of the specified players.
+    permission: mcclassroom.teacher
   visit:
     description: Visit a group's world
     permission: mcclassroom.teacher
