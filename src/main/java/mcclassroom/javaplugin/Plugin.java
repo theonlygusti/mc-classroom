@@ -48,7 +48,7 @@ public class Plugin extends JavaPlugin implements Listener {
       config.reload();
     }
 
-    getCommand("groups").setExecutor(this);
+    getCommand("autogroups").setExecutor(this);
     getCommand("groupsof").setExecutor(this);
     getCommand("makegroup").setExecutor(this);
     getCommand("rotateworlds").setExecutor(this);
@@ -92,7 +92,7 @@ public class Plugin extends JavaPlugin implements Listener {
     discordBot.jda.retrieveUserById(user.discordId).map(net.dv8tion.jda.api.entities.User::getName).queue(name -> {
       sender.sendMessage(getMessage("link-success").replaceAll("%discord_name%", name));
     });
-    } else if (cmd.getName().equalsIgnoreCase("groups")) {
+    } else if (cmd.getName().equalsIgnoreCase("autogroups")) {
       groups = new HashMap<>();
       int totalGroups = Integer.parseInt(args[0]);
       Collections.shuffle(students);

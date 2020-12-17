@@ -9,7 +9,7 @@ commands:
   breakout:
     description: Send groups to worlds
     permission: mcclassroom.teacher
-  groups:
+  autogroups:
     description: Create N groups randomly
     permission: mcclassroom.teacher
   groupsof:

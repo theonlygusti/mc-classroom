@@ -22,3 +22,5 @@ messages:
     These are the commands that you can use:
     **?link**, **?token**: Show you your token for linking your in-game account to your discord account
     **?help**: Show this help message
+  discord-not-a-command: |-
+    `%command%` is not a valid command. Use `?help` to see all valid commands.
