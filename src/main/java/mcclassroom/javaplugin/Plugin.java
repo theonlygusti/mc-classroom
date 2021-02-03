@@ -32,17 +32,15 @@ public class Plugin extends JavaPlugin implements Listener {
   public String discordGuild;
   public String discordHome;
   public DiscordBot discordBot;
-  public HashMap<UUID, PermissionAttachment> permissionAttachments;
-  public HashMap<UUID, User> users;
-  public HashMap<Integer, ArrayList<User>> groups;
-  public ArrayList<User> teachers;
-  public ArrayList<User> students;
+  public HashMap<UUID, PermissionAttachment> permissionAttachments = new HashMap<>();
+  public HashMap<UUID, User> users = new HashMap<>();
+  public HashMap<Integer, ArrayList<User>> groups = new HashMap<>();
+  public ArrayList<User> teachers = new ArrayList<>();
+  public ArrayList<User> students = new ArrayList<>();
 
   @Override
   public void onEnable() {
     config = new PluginConfig(this);
-    permissionAttachments = new HashMap<>();
-    groups = new HashMap<>();
 
     if (!this.getDataFolder().exists()) {
       config.saveDefaultConfig();
