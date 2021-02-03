@@ -89,9 +89,9 @@ public class Plugin extends JavaPlugin implements Listener {
       if (user.groupNumber != null) {
         discordBot.moveUser(user, user.groupNumber);
       }
-    discordBot.jda.retrieveUserById(user.discordId).map(net.dv8tion.jda.api.entities.User::getName).queue(name -> {
-      sender.sendMessage(getMessage("link-success").replaceAll("%discord_name%", name));
-    });
+      discordBot.jda.retrieveUserById(user.discordId).map(net.dv8tion.jda.api.entities.User::getName).queue(name -> {
+        sender.sendMessage(getMessage("link-success").replaceAll("%discord_name%", name));
+      });
     } else if (cmd.getName().equalsIgnoreCase("autogroups")) {
       groups = new HashMap<>();
       int totalGroups = Integer.parseInt(args[0]);
