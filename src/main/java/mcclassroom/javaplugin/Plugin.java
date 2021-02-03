@@ -58,6 +58,8 @@ public class Plugin extends JavaPlugin implements Listener {
     getCommand("visit").setExecutor(this);
     getCommand("link").setExecutor(this);
 
+    getServer().getPluginManager().registerEvents(this, this);
+
     sandboxWorlds = new SandboxWorlds(this);
     loadWorlds();
 
