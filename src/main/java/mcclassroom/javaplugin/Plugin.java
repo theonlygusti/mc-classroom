@@ -166,7 +166,7 @@ public class Plugin extends JavaPlugin implements Listener {
         discordBot.moveUser(student, student.groupNumber);
         sandboxWorlds.sendp(GROUP_WORLD_PREFIX + student.groupNumber, Bukkit.getPlayer(student.minecraftUniqueId));
       }
-      sender.sendMessage(getMessage("shufflegroups-success").replaceAll("%N%", String.valueOf(totalGroups)).replaceAll("%n%", String.valueOf(groups.get(1).size())));
+      sender.sendMessage(getMessage("shufflegroups-success").replaceAll("%N%", String.valueOf(totalGroups)).replaceAll("%n%", String.valueOf(groups.get(0).size())));
     } else if (cmd.getName().equalsIgnoreCase("movegroup")) {
       String playerName = args[0];
       int newGroupNumber = Integer.parseInt(args[1]);
