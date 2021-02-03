@@ -12,7 +12,7 @@
   <artifactId>mc-classroom</artifactId>
   <version>0.0.0</version>
 
-  <name>Minecraft Classroom Java Plugin</name>
+  <name>mc-classroom</name>
   <description>
     Minecraft server plugin for virtual classrooms. Provides administrator interface
     and virtual classroom functionalities.
@@ -61,6 +61,7 @@
         <filtering>true</filtering>
         <includes>
           <include>plugin.yml</include>
+          <include>config.yml</include>
         </includes>
       </resource>
     </resources>
