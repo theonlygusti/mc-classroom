@@ -109,7 +109,7 @@ public class Plugin extends JavaPlugin implements Listener {
         }
         group.add(student);
       }
-      sender.sendMessage(getMessage("groups-success").replaceAll("%N%", String.valueOf(totalGroups)).replaceAll("%n%", String.valueOf(groups.get(1).size())));
+      sender.sendMessage(groupsSuccessMessage());
     } else if (cmd.getName().equalsIgnoreCase("groupsof")) {
       groups = new HashMap<>();
       int groupSize = Integer.parseInt(args[0]);
@@ -124,7 +124,7 @@ public class Plugin extends JavaPlugin implements Listener {
         students.get(i).groupNumber = groupNumber;
         group.add(students.get(i));
       }
-      sender.sendMessage(getMessage("groups-success").replaceAll("%N%", String.valueOf(groups.size())).replaceAll("%n%", String.valueOf(groupSize)));
+      sender.sendMessage(groupsSuccessMessage());
     } else if (cmd.getName().equalsIgnoreCase("rotateworlds")) {
       int amount;
       if (args.length == 1) {
@@ -232,6 +232,13 @@ public class Plugin extends JavaPlugin implements Listener {
       sender.sendMessage(getMessage("bring-success"));
     }
     return true;
+  }
+
+  public String groupsSuccessMessage() {
+    String groupsSuccessTemplate = getMessage("groups-success");
+    String withTotalGroups = groupsSuccessTemplate.replaceAll("%N%", String.valueOf(groups.size()));
+    String withGroupSizes = withTotalGroups.replaceAll("%n%", String.valueOf(groups.get(0).size()));
+    return withGroupSizes;
   }
 
   public void makeTeacher(User user) {
