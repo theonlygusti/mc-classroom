@@ -166,7 +166,7 @@ public class Plugin extends JavaPlugin implements Listener {
         discordBot.moveUser(student, student.groupNumber);
         sandboxWorlds.sendp(GROUP_WORLD_PREFIX + student.groupNumber, Bukkit.getPlayer(student.minecraftUniqueId));
       }
-      sender.sendMessage(getMessage("shufflegroups-success").replaceAll("%N%", String.valueOf(totalGroups)).replaceAll("%n%", String.valueOf(groups.get(0).size())));
+      sender.sendMessage(getMessage("shufflegroups-success").replaceAll("%N%", String.valueOf(totalGroups)).replaceAll("%n%", String.valueOf(getFirstGroup().size())));
     } else if (cmd.getName().equalsIgnoreCase("movegroup")) {
       String playerName = args[0];
       int newGroupNumber = Integer.parseInt(args[1]);
@@ -237,8 +237,12 @@ public class Plugin extends JavaPlugin implements Listener {
   public String groupsSuccessMessage() {
     String groupsSuccessTemplate = getMessage("groups-success");
     String withTotalGroups = groupsSuccessTemplate.replaceAll("%N%", String.valueOf(groups.size()));
-    String withGroupSizes = withTotalGroups.replaceAll("%n%", String.valueOf(groups.get(0).size()));
+    String withGroupSizes = withTotalGroups.replaceAll("%n%", String.valueOf(getFirstGroup().size()));
     return withGroupSizes;
+  }
+
+  public ArrayList<User> getFirstGroup() {
+    return groups.get(1); // group numbers are 1-indexed
   }
 
   public void makeTeacher(User user) {
