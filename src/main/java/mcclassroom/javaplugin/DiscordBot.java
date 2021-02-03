@@ -13,6 +13,7 @@ import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -21,6 +22,7 @@ public class DiscordBot extends ListenerAdapter {
   public static final String GROUP_CHANNEL_PREFIX = "Group ";
 
   public JDA jda;
+  public String guildId;
   public String homeChannelId;
   public int party_count = 0;
   public HashSet<String> seenDiscordUsers;
@@ -28,8 +30,9 @@ public class DiscordBot extends ListenerAdapter {
   public Guild guild;
   public VoiceChannel homeChannel;
 
-  public DiscordBot(Plugin plugin, String token, String homeChannelId) {
+  public DiscordBot(Plugin plugin, String token, String guildId, String homeChannelId) {
     this.plugin = plugin;
+    this.guildId = guildId;
     this.homeChannelId = homeChannelId;
     try {
       jda = JDABuilder.createDefault(token)
@@ -41,7 +44,11 @@ public class DiscordBot extends ListenerAdapter {
     } catch (LoginException e) {
       throw new RuntimeException(e);
     }
-    guild = jda.getGuildById(plugin.getFullyQualified("discord-guild-id"));
+  }
+
+  @Override
+  public void onReady(ReadyEvent event) {
+    guild = jda.getGuildById(guildId);
     homeChannel = guild.getVoiceChannelById(homeChannelId);
     if (homeChannel == null) {
       homeChannel = guild.getVoiceChannels().get(0);
