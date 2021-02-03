@@ -254,6 +254,7 @@ public class Plugin extends JavaPlugin implements Listener {
   public void onPlayerJoin(PlayerJoinEvent event) {
     Player player = event.getPlayer();
     UUID javaId = player.getUniqueId();
+    permissionAttachments.put(javaId, player.addAttachment(this));
     if (!users.containsKey(javaId)) {
       User user = new User(this);
       user.minecraftUniqueId = javaId;
@@ -277,6 +278,7 @@ public class Plugin extends JavaPlugin implements Listener {
     if (user.groupNumber != null) {
       groups.get(user.groupNumber).remove(user);
     }
+    permissionAttachments.remove(javaId);
   }
 
   public void setPermission(UUID minecraftUniqueId, String permissionName, boolean value) {
