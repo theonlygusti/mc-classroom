@@ -24,3 +24,4 @@ messages:
     **?help**: Show this help message
   discord-not-a-command: |-
     `%command%` is not a valid command. Use `?help` to see all valid commands.
+loadedworlds: {}
