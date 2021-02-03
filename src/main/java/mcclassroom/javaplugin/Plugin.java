@@ -29,6 +29,7 @@ public class Plugin extends JavaPlugin implements Listener {
 
   public SandboxWorlds sandboxWorlds;
   public PluginConfig config;
+  public String discordGuild;
   public String discordHome;
   public DiscordBot discordBot;
   public HashMap<UUID, PermissionAttachment> permissionAttachments;
@@ -62,9 +63,10 @@ public class Plugin extends JavaPlugin implements Listener {
     sandboxWorlds = new SandboxWorlds(this);
     loadWorlds();
 
-    discordHome = config.getYamlConfiguration().getString("default-vc");
     String discordToken = config.getYamlConfiguration().getString("discord-bot-token");
-    discordBot = new DiscordBot(this, discordToken, discordHome);
+    discordGuild = config.getYamlConfiguration().getString("discord-guild-id");
+    discordHome = config.getYamlConfiguration().getString("default-vc");
+    discordBot = new DiscordBot(this, discordToken, discordGuild, discordHome);
   }
 
   @Override
